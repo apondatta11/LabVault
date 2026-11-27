@@ -1,4 +1,4 @@
-// Fine Policy Note: Standard late fee applies daily with weekend exemption.
+// Fine Policy Note: Supports 2-day academic grace period and weekend late-fee exemption.
 import type { ConditionGrade } from "@/lib/types";
 
 export interface FineCalculationInput {
