@@ -66,3 +66,4 @@ export function formatBDT(amount: number): string {
       });
   return `৳${formatted}`;
 }
+export const LAB_CURRENCY_SYMBOL = "৳";
