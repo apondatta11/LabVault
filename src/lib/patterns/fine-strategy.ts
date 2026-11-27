@@ -1,3 +1,4 @@
+// Fine Policy Note: Supports 2-day academic grace period for late lab returns.
 import type { ConditionGrade } from "@/lib/types";
 
 export interface FineCalculationInput {
