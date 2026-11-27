@@ -1,0 +1,117 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum EquipmentCategory {
+  Consumable
+  ReturnableComponent
+  HighValueInstrument
+}
+
+enum LoanStatus {
+  Active
+  Returned
+  Overdue
+}
+
+enum ConditionGrade {
+  Good
+  MinorDamage
+  Broken
+  Lost
+}
+
+enum FineStatus {
+  Pending
+  Settled
+  Waived
+}
+
+enum ReservationStatus {
+  Confirmed
+  Completed
+  Cancelled
+}
+
+model Equipment {
+  id               String            @id @default(cuid())
+  name             String
+  sku              String            @unique
+  serialNumber     String?           @unique
+  category         EquipmentCategory
+  description      String
+  totalStock       Int
+  availableStock   Int
+  minStockAlert    Int               @default(3)
+  replacementCost  Float             @default(25.0)
+  location         String            @default("CSE Hardware Lab")
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+
+  loans            Loan[]
+  reservations     Reservation[]
+}
+
+model Loan {
+  id              String          @id @default(cuid())
+  equipmentId     String
+  equipment       Equipment       @relation(fields: [equipmentId], references: [id], onDelete: Cascade)
+  studentId       String
+  studentName     String
+  studentEmail    String
+  quantity        Int
+  borrowedAt      DateTime        @default(now())
+  dueAt           DateTime?
+  returnedAt      DateTime?
+  status          LoanStatus      @default(Active)
+  conditionOnReturn ConditionGrade?
+  notes           String?
+  requiresReturn  Boolean         @default(true)
+
+  fine            Fine?
+}
+
+model Fine {
+  id           String         @id @default(cuid())
+  loanId       String         @unique
+  loan         Loan           @relation(fields: [loanId], references: [id], onDelete: Cascade)
+  studentId    String
+  amount       Float
+  reason       String
+  strategyUsed String
+  condition    ConditionGrade
+  daysLate     Int            @default(0)
+  status       FineStatus     @default(Pending)
+  createdAt    DateTime       @default(now())
+  settledAt    DateTime?
+}
+
+model Reservation {
+  id            String            @id @default(cuid())
+  equipmentId   String?
+  equipment     Equipment?        @relation(fields: [equipmentId], references: [id], onDelete: SetNull)
+  workbench     String
+  studentId     String
+  studentName   String
+  purpose       String
+  startTime     DateTime
+  endTime       DateTime
+  status        ReservationStatus @default(Confirmed)
+  createdAt     DateTime          @default(now())
+}
+
+model AuditLog {
+  id          String   @id @default(cuid())
+  eventType   String
+  actor       String
+  targetId    String?
+  targetName  String?
+  summary     String
+  metadata    Json?
+  createdAt   DateTime @default(now())
+}
