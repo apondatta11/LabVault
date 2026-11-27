@@ -1,3 +1,4 @@
+// Fine Policy Note: Standard late fee applies daily with weekend exemption.
 import type { ConditionGrade } from "@/lib/types";
 
 export interface FineCalculationInput {
