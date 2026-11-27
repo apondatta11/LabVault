@@ -116,7 +116,7 @@ export class LowStockAlertObserver implements LabEventObserver {
 
   constructor(
     private readonly dispatcher: NotificationDispatcher,
-    private readonly labOfficerEmail = "lab-officer@cse.buet.ac.bd"
+    private readonly labOfficerEmail = "lab-officer@cse.ruet.ac.bd"
   ) {}
 
   async update(event: LabEvent): Promise<void> {

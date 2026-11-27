@@ -8,7 +8,7 @@ export interface StudentIdVerifier {
 }
 
 /**
- * Validates university student IDs (7-digit BUET CSE format like 2104012 or alphanumeric 6-12 chars)
+ * Validates university student IDs (7-digit RUET CSE format like 2103097 or alphanumeric 6-12 chars)
  * and institutional email formatting.
  */
 export class UniversityStudentVerifier implements StudentIdVerifier {
@@ -22,7 +22,7 @@ export class UniversityStudentVerifier implements StudentIdVerifier {
     if (!/^[A-Za-z0-9]{6,12}$/.test(trimmedId)) {
       return {
         valid: false,
-        reason: "Student ID must be 6–12 alphanumeric characters (e.g., 2104012).",
+        reason: "Student ID must be 6–12 alphanumeric characters (e.g., 2103097).",
       };
     }
 

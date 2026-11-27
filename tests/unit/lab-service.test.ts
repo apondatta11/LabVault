@@ -87,9 +87,9 @@ describe("LabService (Mocked Repository, StudentVerifier & Notifier)", () => {
       id: "loan_1",
       equipmentId: "eq_stm32",
       equipmentName: "STM32 Nucleo-F446RE",
-      studentId: "2104012",
+      studentId: "2103097",
       studentName: "Rafiqul Islam",
-      studentEmail: "2104012@cse.buet.ac.bd",
+      studentEmail: "2103097@student.ruet.ac.bd",
       quantity: 3,
       borrowedAt: "2026-11-27T10:00:00.000Z",
       dueAt: "2026-12-04T10:00:00.000Z",
@@ -103,9 +103,9 @@ describe("LabService (Mocked Repository, StudentVerifier & Notifier)", () => {
 
     const loan = await service.checkoutEquipment({
       equipmentId: "eq_stm32",
-      studentId: "2104012",
+      studentId: "2103097",
       studentName: "Rafiqul Islam",
-      studentEmail: "2104012@cse.buet.ac.bd",
+      studentEmail: "2103097@student.ruet.ac.bd",
       quantity: 3,
     });
 
@@ -139,9 +139,9 @@ describe("LabService (Mocked Repository, StudentVerifier & Notifier)", () => {
     const activeLoan: LoanDTO = {
       id: "loan_2",
       equipmentId: "eq_stm32",
-      studentId: "2104012",
+      studentId: "2103097",
       studentName: "Rafiqul Islam",
-      studentEmail: "2104012@cse.buet.ac.bd",
+      studentEmail: "2103097@student.ruet.ac.bd",
       quantity: 1,
       borrowedAt: "2026-11-15T10:00:00.000Z",
       dueAt: "2026-11-22T10:00:00.000Z",
@@ -162,7 +162,7 @@ describe("LabService (Mocked Repository, StudentVerifier & Notifier)", () => {
     vi.mocked(repo.createFine).mockResolvedValue({
       id: "fine_99",
       loanId: "loan_2",
-      studentId: "2104012",
+      studentId: "2103097",
       amount: 24.38,
       reason: "Broken",
       strategyUsed: "DamagedItemFineStrategy",
@@ -195,7 +195,7 @@ describe("LabService (Mocked Repository, StudentVerifier & Notifier)", () => {
       id: "res_existing",
       equipmentId: "eq_rigol",
       workbench: "Bench 01",
-      studentId: "2104099",
+      studentId: "2203125",
       studentName: "Existing Student",
       purpose: "Signal test",
       startTime: "2026-11-28T09:00:00.000Z",
@@ -207,7 +207,7 @@ describe("LabService (Mocked Repository, StudentVerifier & Notifier)", () => {
     await expect(
       service.createReservation({
         workbench: "Bench 01",
-        studentId: "2104012",
+        studentId: "2103097",
         studentName: "Rafiqul Islam",
         purpose: "Oscilloscope check",
         startTime: new Date("2026-11-28T10:00:00.000Z"),
@@ -222,9 +222,9 @@ describe("LabService (Mocked Repository, StudentVerifier & Notifier)", () => {
       {
         id: "l1",
         equipmentId: "eq_stm32",
-        studentId: "2104012",
+        studentId: "2103097",
         studentName: "Test",
-        studentEmail: "test@cse.buet.ac.bd",
+        studentEmail: "2103097@student.ruet.ac.bd",
         quantity: 1,
         borrowedAt: "2026-11-20T00:00:00Z",
         dueAt: "2026-11-22T00:00:00Z",
@@ -239,7 +239,7 @@ describe("LabService (Mocked Repository, StudentVerifier & Notifier)", () => {
       {
         id: "f1",
         loanId: "l1",
-        studentId: "2104012",
+        studentId: "2103097",
         amount: 15.5,
         reason: "Late",
         strategyUsed: "StandardLateFeeStrategy",
@@ -306,8 +306,8 @@ describe("LabService (Mocked Repository, StudentVerifier & Notifier)", () => {
     vi.mocked(repo.getFineById).mockResolvedValueOnce({
       id: "fine_1",
       loanId: "loan_1",
-      studentId: "2104012",
-      amount: 10,
+      studentId: "2103097",
+      amount: 100,
       reason: "Late",
       strategyUsed: "StandardLateFeeStrategy",
       condition: "Good",
@@ -319,8 +319,8 @@ describe("LabService (Mocked Repository, StudentVerifier & Notifier)", () => {
     vi.mocked(repo.updateFineStatus).mockResolvedValueOnce({
       id: "fine_1",
       loanId: "loan_1",
-      studentId: "2104012",
-      amount: 10,
+      studentId: "2103097",
+      amount: 100,
       reason: "Late",
       strategyUsed: "StandardLateFeeStrategy",
       condition: "Good",

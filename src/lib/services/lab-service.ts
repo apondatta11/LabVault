@@ -425,17 +425,24 @@ export class LabService {
   }
 }
 
+const MEMORY_SEED_VERSION = "v2-ruet-bdt";
+
 const globalForLab = globalThis as unknown as {
   labRepository?: LabRepository;
+  labRepoVersion?: string;
   labNotifier?: ConsoleNotificationDispatcher;
 };
 
 export function getLabRepository(): LabRepository {
-  if (!globalForLab.labRepository) {
+  if (
+    !globalForLab.labRepository ||
+    globalForLab.labRepoVersion !== MEMORY_SEED_VERSION
+  ) {
     globalForLab.labRepository =
       process.env.USE_MEMORY_DB === "true"
         ? new MemoryLabRepository()
         : new PrismaLabRepository();
+    globalForLab.labRepoVersion = MEMORY_SEED_VERSION;
   }
   return globalForLab.labRepository;
 }

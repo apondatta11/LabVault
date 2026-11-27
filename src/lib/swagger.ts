@@ -55,9 +55,9 @@ export function getOpenApiSpec() {
             ],
             properties: {
               equipmentId: { type: "string", example: "eq_stm32" },
-              studentId: { type: "string", example: "2104012" },
+              studentId: { type: "string", example: "2103097" },
               studentName: { type: "string", example: "Rafiqul Islam" },
-              studentEmail: { type: "string", example: "2104012@cse.buet.ac.bd" },
+              studentEmail: { type: "string", example: "2103097@student.ruet.ac.bd" },
               quantity: { type: "integer", example: 1 },
               notes: { type: "string" },
             },
@@ -83,7 +83,7 @@ export function getOpenApiSpec() {
             properties: {
               equipmentId: { type: "string", nullable: true, example: "eq_rigol" },
               workbench: { type: "string", example: "Bench 01 - High Voltage & Signal" },
-              studentId: { type: "string", example: "2104012" },
+              studentId: { type: "string", example: "2103097" },
               studentName: { type: "string", example: "Rafiqul Islam" },
               purpose: { type: "string", example: "Oscilloscope signal capture" },
               startTime: { type: "string", format: "date-time" },

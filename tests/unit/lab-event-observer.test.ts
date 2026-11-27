@@ -32,11 +32,11 @@ describe("LabEventPublisher (Observer Pattern)", () => {
     const dueAt = new Date("2026-12-04T10:00:00.000Z");
     await publisher.notify({
       type: "EQUIPMENT_CHECKOUT",
-      actor: "2104012",
+      actor: "2103097",
       equipmentId: "eq_esp32",
       equipmentName: "ESP32-WROOM-32 DevKit",
       quantity: 2,
-      studentEmail: "2104012@cse.buet.ac.bd",
+      studentEmail: "2103097@student.ruet.ac.bd",
       dueAt,
       remainingStock: 2,
       minStockAlert: 4,
@@ -45,12 +45,12 @@ describe("LabEventPublisher (Observer Pattern)", () => {
     // Due reminder + Low stock alert both fire
     expect(mockDispatcher.send).toHaveBeenCalledTimes(2);
     expect(mockDispatcher.send).toHaveBeenCalledWith(
-      "2104012@cse.buet.ac.bd",
+      "2103097@student.ruet.ac.bd",
       expect.stringContaining("Checkout Confirmation"),
       expect.stringContaining("ESP32-WROOM-32 DevKit")
     );
     expect(mockDispatcher.send).toHaveBeenCalledWith(
-      "lab-officer@cse.buet.ac.bd",
+      "lab-officer@cse.ruet.ac.bd",
       expect.stringContaining("Low Stock"),
       expect.stringContaining("2")
     );
@@ -60,7 +60,7 @@ describe("LabEventPublisher (Observer Pattern)", () => {
     expect(mockAuditWriter.write).toHaveBeenCalledWith(
       expect.objectContaining({
         eventType: "EQUIPMENT_CHECKOUT",
-        actor: "2104012",
+        actor: "2103097",
         targetId: "eq_esp32",
       })
     );
@@ -78,7 +78,7 @@ describe("LabEventPublisher (Observer Pattern)", () => {
 
     await publisher.notify({
       type: "EQUIPMENT_RETURNED",
-      actor: "2104012",
+      actor: "2103097",
       equipmentId: "eq_1",
       equipmentName: "STM32",
       quantity: 1,
@@ -88,7 +88,7 @@ describe("LabEventPublisher (Observer Pattern)", () => {
 
     await publisher.notify({
       type: "RESERVATION_CREATED",
-      actor: "2104012",
+      actor: "2103097",
       reservationId: "res_1",
       workbench: "Bench 01",
       equipmentName: "Oscilloscope",
@@ -100,8 +100,8 @@ describe("LabEventPublisher (Observer Pattern)", () => {
       type: "FINE_SETTLED",
       actor: "LAB_OFFICER",
       fineId: "fine_1",
-      studentId: "2104012",
-      amount: 10.5,
+      studentId: "2103097",
+      amount: 500,
     });
 
     expect(mockAuditWriter.write).toHaveBeenCalledTimes(3);
